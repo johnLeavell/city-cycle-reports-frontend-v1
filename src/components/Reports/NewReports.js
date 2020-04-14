@@ -4,39 +4,40 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 
-// const useStyles = makeStyles((theme) => ({
-//     container: {
-//       display: 'flex',
-//       flexWrap: 'wrap',
-//     },
-//     textField: {
-//       marginLeft: theme.spacing(1),
-//       marginRight: theme.spacing(1),
-//       width: 200,
-//     },
-//   }));
+const useStyles = makeStyles((theme) => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
+    },
+  }));
+
 const API = 'http://localhost:3000/api/v1/reports'
   
 export class NewReports extends Component {
     constructor(){
         super()
         this.state = {
-            user_id: '',
-            title: '',
-            content: '',
-            location: '',
-            date: '',
-            time: '',
-            img_src: ''
+            user_id: "",
+            title: "",
+            content: "",
+            location: "",
+            date: "",
+            time: "",
+            img_src: "",
         }
     }
 
     handleChange = event => {
-        event.persist()
-        this.setState({
-            [event.target.id]: event.target.value
-        })
+        let change = {}
+        change[event.target.name] = event.target.value
+        this.setState(change)
     }
+    
 
     handleSubmit = event => {
         event.preventDefault()
@@ -47,14 +48,24 @@ export class NewReports extends Component {
           ,
           body: JSON.stringify(this.state)
         })
+        this.setState({
+            user_id: "",
+            title: "",
+            content: "",
+            location: "",
+            date: "",
+            time: "",
+            img_src: "",
+        })
       }
 
     render() {
-
+        console.log(this.state);
+        
         return (
             <div>
                 <h1>Create a new Report</h1>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} autoComplete="off">
                         <div className="title">
                             <label htmlFor="title">Title </label>
                             <input 
@@ -73,7 +84,7 @@ export class NewReports extends Component {
                             className=""
                             placeholder="content"
                             name="content"
-                            value=""
+                            value={this.state.content} onChange={this.handleChange}
                             />  
                         </div>
                         <div className="">
@@ -83,7 +94,7 @@ export class NewReports extends Component {
                             className=""
                             placeholder="location"
                             name="location"
-                            value=""
+                            value={this.state.location} onChange={this.handleChange}
                             />  
                         </div>
                         <div className="">
@@ -93,7 +104,7 @@ export class NewReports extends Component {
                             className=""
                             placeholder="date"
                             name="date"
-                            value=""
+                            value={this.state.date} onChange={this.handleChange}
                             />  
                         </div>
                         <div className="">
@@ -103,7 +114,7 @@ export class NewReports extends Component {
                             className=""
                             placeholder="time"
                             name="time"
-                            value=""
+                            value={this.state.time} onChange={this.handleChange}
                             />  
                         </div>
                         <div className="">
@@ -113,7 +124,7 @@ export class NewReports extends Component {
                             className=""
                             placeholder="img"
                             name="img"
-                            value=""
+                            value={this.state.img_src} onChange={this.handleChange}
                             />
                         </div>
                         <Button size="small" color="primary">

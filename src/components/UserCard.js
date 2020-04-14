@@ -19,28 +19,46 @@ const useStyles = makeStyles({
 
 const UserCard = (props) =>{
     const classes = useStyles();
-console.log(props.user);
 
+    const tools = props.user
+//  console.log( props.user.reports[0]);
+
+console.log(tools.reports)
+// debugger
+
+// const newTools = tools.map(tool => {
+//    return console.log(tool);
+    
+// })
+
+// console.log(newTools);
+
+
+// props.user.reports.map(report => {
+//     return (report.img_src)
+// })
+
+// props.user.reports.map(report => {
+//     return (report.title);
+//     })
+
+// props.user.reports.map(report => {
+    // return (report.content);
+    // })
     return (
         <Card className={classes.root}>
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={props.user.reports.map(report => {
-                  return (report.img_src)
-              })}
+              image={"props.user"}
               title="Contemplative Reptile"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h5">
-              {props.user.reports.map(report => {
-                    return (report.title);
-                    })}
+              {""}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-              {props.user.reports.map(report => {
-                    return (report.content);
-                    })}
+              {''}
               </Typography>
             </CardContent>
           </CardActionArea>

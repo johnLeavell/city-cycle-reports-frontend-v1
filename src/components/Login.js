@@ -18,27 +18,13 @@ export class Login extends Component {
   }
 
   handleSubmit = e => {
-    e.preventDefualt()
-
+    e.preventDefault()
+    this.props.handleUserLogin(this.state)
     this.setState({
       username: "",
       password: ""
     })
-
-    const reqObj = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    }
-
-    fetch('http://localhost:3000/api/v1/auth', reqObj)
-    .then(resp => resp.json())
-    .then(user => {
-      this.props.history.push('/about')
-      // redirect to about page
-    })
+    this.props.history.push('/dashboard')
   }
 
 

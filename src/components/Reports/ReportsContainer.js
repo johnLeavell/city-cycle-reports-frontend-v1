@@ -1,36 +1,41 @@
-import React from 'react'
-import Dashboard from '../Dashboard'
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import ReportCard from './ReportCard'
 
-const API = 'http://localhost:3000/api/v1/users/'
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
-class ReportsContainer extends React.Component {
-    constructor(){
-        super()
-        this.state = {
-            users: [],
-            userReport: []
-        }
-    }
+export default function ReportsContainer(props) {
+  const classes = useStyles();
 
-    componentDidMount = () => {
-        fetch(API)
-        .then( resp => resp.json())
-        .then( users => 
-            this.setState({
-            // users: users,
-            users: users,
-            userReport: users.reports}))
-            // userReport: users[0].reports}))
-
-    }
-
-    render() {
+  const renderReportCards= () => {
+    return props.reports.map(report => {
         return (
-            <div>
-                <Dashboard users={this.state.users} userReports={this.state.userReport} />
-            </div>
+            <Grid item xs={3}>
+                <ReportCard report={report} key={report.id} />
+            </Grid>
         )
+     })
     }
-}
 
-export default ReportsContainer
+    return (
+        <div className={classes.root}>
+            <Grid container spacing={3}>
+               {renderReportCards()}
+            </Grid>
+        </div>
+    );
+}
