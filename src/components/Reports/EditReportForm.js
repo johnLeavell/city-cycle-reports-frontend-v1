@@ -1,69 +1,68 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
-// import 'date-fns';
-// import Grid from '@material-ui/core/Grid';
-// import DateFnsUtils from '@date-io/date-fns';
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardTimePicker,
-//   KeyboardDatePicker,
-// } from '@material-ui/pickers';
 
 
-const API = 'http://localhost:3000/api/v1/reports'
-  
-export class NewReports extends Component {
+export class EditReportForm extends Component {
     constructor(){
         super()
         this.state = {
-            user_id: "",
-            title: "",
-            content: "",
-            location: "",
-            date: "",
-            time: "",
-            img_src: "",
+                title: '',
+                content: '',
+                date: '',
+                time: '',
+                location: '',
+                img_src: ''
+            }
         }
-    }
-
-    handleChange = e => {
-        let change = {}
-        change[e.target.name] = e.target.value
-        this.setState(change)
-    }
     
 
-    handleSubmit = event => {
-        event.preventDefault()
-        fetch(API, {
-            method: "POST",
-            headers: 
-                'Content-Type: application/json'
-          ,
-          body: JSON.stringify(this.state)
-        })
+    handleOnChange = e => {
         this.setState({
-            user_id: "",
-            title: "",
-            content: "",
-            location: "",
-            date: "",
-            time: "",
-            img_src: "",
+            [e.target.name]: e.target.value
         })
-      }
+    }
 
+    handleOnSubmit = (e, clickedReport) => {
+		e.preventDefault()
+
+		const reqObj = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			},
+			body: JSON.stringify({
+				...this.state
+			})
+        }
+
+        fetch(`http://localhost:3000/api/v1/reports${clickedReport.id}`, reqObj)
+        .then(resp => resp.json())
+        .then(report => {  console.log(report);
+        
+            // if (report.error) {
+            //     alert(report.error)
+            //     return
+            // }
+            //     this.props.history.push('/')
+            })
+
+        this.setState({
+            title: '',
+            content: '',
+            date: '',
+            time: '',
+            location: '',
+            img_src: ''
+        })
+    }
+
+    
     render() {
-        console.log(this.state);
-        // const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-
-        // const handleDateChange = (date) => {
-        //   setSelectedDate(date);
-        // };
         return (
             <div>
                 <h1>Create a new Report</h1>
-                    <form onSubmit={this.handleSubmit} autoComplete="off">
+                    <form onSubmit={this.handleOnSubmit} autoComplete="off">
                         <div className="title">
                             <label htmlFor="title">Title </label>
                             <input 
@@ -126,7 +125,7 @@ export class NewReports extends Component {
                             />
                         </div>
                         <Button size="small" color="primary">
-                        Submit Report
+                        Update Report
                         </Button>
                     </form>
             </div>
@@ -134,36 +133,4 @@ export class NewReports extends Component {
     }
 }
 
-export default NewReports
- 
-//   return (
-//     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-//       <Grid container justify="space-around">
-//         <KeyboardDatePicker
-//           margin="normal"
-//           id="date-picker-dialog"
-//           label="Date picker dialog"
-//           format="MM/dd/yyyy"
-//           value={selectedDate}
-//           onChange={handleDateChange}
-//           KeyboardButtonProps={{
-//             'aria-label': 'change date',
-//           }}
-//         />
-//         <KeyboardTimePicker
-//           margin="normal"
-//           id="time-picker"
-//           label="Time picker"
-//           value={selectedDate}
-//           onChange={handleDateChange}
-//           KeyboardButtonProps={{
-//             'aria-label': 'change time',
-//           }}
-//         />
-//       </Grid>
-//     </MuiPickersUtilsProvider>
-//   );
-// }
-
-
-
+export default EditReportForm

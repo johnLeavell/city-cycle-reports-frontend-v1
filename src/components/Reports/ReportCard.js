@@ -20,32 +20,43 @@ const useStyles = makeStyles({
 
 export default function ReportCard(props) {
   const classes = useStyles();
-    
+
+  // console.log(props);
+  
+  const renderCardActions = () => {
+    if(props.renderButtons) {
+      return (
+        <CardActions>
+        <Button onClick={(e) => props.handleEditReport(e, props.report)} size="small" color="primary">
+          Edit
+        </Button>
+        <Button onClick={(e) => props.handleDeleteReport(e, props.report)} size="small" color="primary">
+          Delete Report
+        </Button>
+      </CardActions>
+      )
+    }
+  }
+
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image={props.report.img_src || 'https://www.berkeleyside.com/wp-content/uploads/2019/09/Gilman-bike-crash-02.jpg'} 
-          title="Contemplative Reptile"
+          title="City Reports"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.report.title.substring(0, 10) + "..." }
+            {props.report.title.substring(0, 20) + "..." }
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-           {props.report.content.substring(0, 40) + "..."}
+           {props.report.content.substring(0, 180) + "..."}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
+        {renderCardActions()}
     </Card>
   );
 }

@@ -10,7 +10,6 @@ export class Login extends Component {
   }
 
   handleInputChange = e => {
-    // console.log(e.target)
     const { value, name } = e.target
     this.setState({
       [name]:value

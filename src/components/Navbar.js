@@ -50,9 +50,6 @@ export default function Navbar() {
                 <NavLink to="/signup">
                 <Button color="inherit">Signup</Button>
                 </NavLink>
-                <NavLink to="/about">
-                <Button color="inherit">About</Button>
-                </NavLink>
               </Toolbar>
             </AppBar>
           </div>
