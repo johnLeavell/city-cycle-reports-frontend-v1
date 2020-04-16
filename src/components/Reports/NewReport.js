@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
-// import 'date-fns';
-// import Grid from '@material-ui/core/Grid';
-// import DateFnsUtils from '@date-io/date-fns';
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardTimePicker,
-//   KeyboardDatePicker,
-// } from '@material-ui/pickers';
 
 
 const API = 'http://localhost:3000/api/v1/reports'
   
-export class NewReports extends Component {
+export class NewReport extends Component {
     constructor(){
         super()
         this.state = {
@@ -27,13 +19,14 @@ export class NewReports extends Component {
     }
 
     handleChange = e => {
+        e.preventDefault();
         let change = {}
         change[e.target.name] = e.target.value
         this.setState(change)
     }
     
-
     handleSubmit = event => {
+
         event.preventDefault()
         fetch(API, {
             method: "POST",
@@ -55,11 +48,7 @@ export class NewReports extends Component {
 
     render() {
         console.log(this.state);
-        // const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
-        // const handleDateChange = (date) => {
-        //   setSelectedDate(date);
-        // };
         return (
             <div>
                 <h1>Create a new Report</h1>
@@ -76,11 +65,11 @@ export class NewReports extends Component {
                             />
                         </div>
                         <div className="">
-                            <label htmlFor="">Content </label>
+                            <label htmlFor="content">Content </label>
                             <input 
                             type="text"
                             className=""
-                            placeholder="content"
+                            placeholder="Content"
                             name="content"
                             value={this.state.content} onChange={this.handleChange}
                             />  
@@ -90,12 +79,12 @@ export class NewReports extends Component {
                             <input 
                             type="text"
                             className=""
-                            placeholder="location"
+                            placeholder="Location"
                             name="location"
                             value={this.state.location} onChange={this.handleChange}
                             />  
-                        </div>
-                            <div className="">
+                        </div> 
+                        <div className="">
                             <label htmlFor="">Date </label>
                             <input 
                             type="text"
@@ -109,21 +98,17 @@ export class NewReports extends Component {
                             <label htmlFor="">Time </label>
                             <input 
                             type="text"
-                            className=""
                             placeholder="time"
                             name="time"
-                            value={this.state.time} onChange={this.handleChange}
-                            />  
+                            value={this.state.time} onChange={this.handleChange} />  
                         </div>
                         <div className="">
-                            <label htmlFor="">Image </label>
+                            <label htmlFor="">Report Image </label>
                             <input 
                             type="text"
-                            className=""
-                            placeholder="img"
-                            name="img"
-                            value={this.state.img_src} onChange={this.handleChange}
-                            />
+                            placeholder="image url"
+                            name="reportImage"
+                            value={this.state.img_src} onChange={this.handleChange} />
                         </div>
                         <Button size="small" color="primary">
                         Submit Report
@@ -134,7 +119,7 @@ export class NewReports extends Component {
     }
 }
 
-export default NewReports
+export default NewReport
  
 //   return (
 //     <MuiPickersUtilsProvider utils={DateFnsUtils}>

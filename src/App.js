@@ -5,8 +5,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Signup from './components/Signup';
-import NewReports from './components/Reports/NewReports'
 import Dashboard from './components/Dashboard';
+import NewReport from './components/Reports/NewReport'
 // import EditReportForm from './components/Reports/EditReportForm'
 
 
@@ -84,36 +84,37 @@ class App extends React.Component {
     }
   }
 
-    handleEditReport = (e, clickedReport) => {
-      e.preventDefault()
+  handleEditReport = (e, clickedReport) => {
+    e.preventDefault()
 
-      const reqObj = {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+    const reqObj = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          ...this.state
-        })
-      }
-
-      const confirmation = window.confirm('Are you sure you want to edit this report?');
-      
-      if(confirmation) {
-        fetch(`http://localhost:3000/api/v1/reports/${clickedReport.id}`, reqObj )
-        .then( resp => resp.json())
-        .then( editedReport => {
-        
-          const newReports = this.state.reports.filter(report => report.id !== editedReport.id);
-        
-          const loggedInUserReports = this.state.loggedInUser.reports.filter(report => report.id !== editedReport.id)
-            this.setState({
-              loggedInUser: {...this.state.loggedInUser, reports: loggedInUserReports},
-              reports: newReports
-            })
+      body: JSON.stringify({
+        ...this.state
       })
-    }}
+    }
+
+    const confirmation = window.confirm('Are you sure you want to edit this report?');
+      
+    if(confirmation) {
+      fetch(`http://localhost:3000/api/v1/reports/${clickedReport.id}`, reqObj )
+      .then( resp => resp.json())
+      .then( editedReport => {
+        
+      const newReports = this.state.reports.filter(report => report.id !== editedReport.id);
+        
+      const loggedInUserReports = this.state.loggedInUser.reports.filter(report => report.id !== editedReport.id)
+        this.setState({
+          loggedInUser: {...this.state.loggedInUser, reports: loggedInUserReports},
+          reports: newReports
+        })
+      })
+    }
+}
 
 
   render(){
@@ -125,9 +126,10 @@ class App extends React.Component {
               <Route exact path='/' render={ (props) => <Home {...props} reports={this.state.reports} /> } />
               <Route path='/login' render={ (props) => <Login {...props} handleUserLogin={this.handleUserLogin} /> } />
               <Route path='/dashboard' render={ (props) => <Dashboard {...props} handleEditReport={this.handleEditReport} handleDeleteReport={this.handleDeleteReport} users={this.state.users} loggedInUser={this.state.loggedInUser}  /> }  />
-              <Route path='/newreport' component={NewReports} />
               {/* <Route path='/reports/:id/edit' component={EditReportForm} /> */}
               <Route path='/signup' component={Signup} />
+              <Route path='/newreport' component={NewReport} />
+
             </Switch>
         </div>
     </BrowserRouter>
