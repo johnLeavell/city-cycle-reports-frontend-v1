@@ -2,67 +2,56 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 
 
+const API = 'http://localhost:3000/api/v1/reports'
+  
 export class EditReportForm extends Component {
     constructor(){
         super()
         this.state = {
-                title: '',
-                content: '',
-                date: '',
-                time: '',
-                location: '',
-                img_src: ''
-            }
+            user_id: "",
+            title: "",
+            content: "",
+            location: "",
+            date: "",
+            time: "",
+            img_src: "",
         }
-    
-
-    handleOnChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
     }
 
-    handleOnSubmit = (e, clickedReport) => {
-		e.preventDefault()
-
-		const reqObj = {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/json'
-			},
-			body: JSON.stringify({
-				...this.state
-			})
-        }
-
-        fetch(`http://localhost:3000/api/v1/reports${clickedReport.id}`, reqObj)
-        .then(resp => resp.json())
-        .then(report => {  console.log(report);
-        
-            // if (report.error) {
-            //     alert(report.error)
-            //     return
-            // }
-            //     this.props.history.push('/')
-            })
-
-        this.setState({
-            title: '',
-            content: '',
-            date: '',
-            time: '',
-            location: '',
-            img_src: ''
-        })
+    handleChange = e => {
+        e.preventDefault();
+        let change = {}
+        change[e.target.name] = e.target.value
+        this.setState(change)
     }
-
     
+    handleSubmit = event => {
+
+        event.preventDefault()
+        fetch(API, {
+            method: "POST",
+            headers: 
+                'Content-Type: application/json'
+          ,
+          body: JSON.stringify(this.state)
+        })
+        this.setState({
+            user_id: "",
+            title: "",
+            content: "",
+            location: "",
+            date: "",
+            time: "",
+            img_src: "",
+        })
+      }
+
     render() {
+        // console.log(this.state);
         return (
             <div>
-                <h1>Create a new Report</h1>
-                    <form onSubmit={this.handleOnSubmit} autoComplete="off">
+                <h1>Edit your Report</h1>
+                    <form onSubmit={this.handleSubmit} autoComplete="off">
                         <div className="title">
                             <label htmlFor="title">Title </label>
                             <input 
@@ -75,11 +64,11 @@ export class EditReportForm extends Component {
                             />
                         </div>
                         <div className="">
-                            <label htmlFor="">Content </label>
+                            <label htmlFor="content">Content </label>
                             <input 
                             type="text"
                             className=""
-                            placeholder="content"
+                            placeholder="Content"
                             name="content"
                             value={this.state.content} onChange={this.handleChange}
                             />  
@@ -89,12 +78,12 @@ export class EditReportForm extends Component {
                             <input 
                             type="text"
                             className=""
-                            placeholder="location"
+                            placeholder="Location"
                             name="location"
                             value={this.state.location} onChange={this.handleChange}
                             />  
-                        </div>
-                            <div className="">
+                        </div> 
+                        <div className="">
                             <label htmlFor="">Date </label>
                             <input 
                             type="text"
@@ -108,24 +97,20 @@ export class EditReportForm extends Component {
                             <label htmlFor="">Time </label>
                             <input 
                             type="text"
-                            className=""
                             placeholder="time"
                             name="time"
-                            value={this.state.time} onChange={this.handleChange}
-                            />  
+                            value={this.state.time} onChange={this.handleChange} />  
                         </div>
                         <div className="">
-                            <label htmlFor="">Image </label>
+                            <label htmlFor="">Report Image </label>
                             <input 
                             type="text"
-                            className=""
-                            placeholder="img"
-                            name="img"
-                            value={this.state.img_src} onChange={this.handleChange}
-                            />
+                            placeholder="image url"
+                            name="reportImage"
+                            value={this.state.img_src} onChange={this.handleChange} />
                         </div>
                         <Button size="small" color="primary">
-                        Update Report
+                        Save edit
                         </Button>
                     </form>
             </div>
@@ -134,3 +119,7 @@ export class EditReportForm extends Component {
 }
 
 export default EditReportForm
+
+
+
+

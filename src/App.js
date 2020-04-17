@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import NewReport from './components/Reports/NewReport'
-// import EditReportForm from './components/Reports/EditReportForm'
+import EditReportForm from './components/Reports/EditReportForm'
 
 
 const API = 'http://localhost:3000/api/v1/'
@@ -126,7 +126,7 @@ class App extends React.Component {
               <Route exact path='/' render={ (props) => <Home {...props} reports={this.state.reports} /> } />
               <Route path='/login' render={ (props) => <Login {...props} handleUserLogin={this.handleUserLogin} /> } />
               <Route path='/dashboard' render={ (props) => <Dashboard {...props} handleEditReport={this.handleEditReport} handleDeleteReport={this.handleDeleteReport} users={this.state.users} loggedInUser={this.state.loggedInUser}  /> }  />
-              {/* <Route path='/reports/:id/edit' component={EditReportForm} /> */}
+              <Route path='/reports/:id/edit' component={EditReportForm} />
               <Route path='/signup' component={Signup} />
               <Route path='/newreport' component={NewReport} />
 
