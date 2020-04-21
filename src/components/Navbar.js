@@ -1,11 +1,27 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {
+    AppBar,
+    Toolbar,
+    // ListItem,
+    IconButton,
+    // ListItemText,
+    // Avatar,
+    // Divider,
+    // List,
+    Typography,
+    // Box 
+} from "@material-ui/core";
+import {
+//     ArrowBack,
+//     AssignmentInd,
+//     Home,
+//     Apps,
+    // ContactMail
+} from "@material-ui/icons";
+
 import { Link, NavLink } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +41,7 @@ export default function Navbar() {
     const classes = useStyles();
         return (
           <div className={classes.root}>
-            <AppBar position="sticky">
+            <AppBar position="static" style={{ background: "#888" }}>
               <Toolbar>
                 <IconButton 
                 edge="start" 

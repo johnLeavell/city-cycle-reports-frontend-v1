@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -8,10 +9,10 @@ import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import NewReport from './components/Reports/NewReport'
 import EditReportForm from './components/Reports/EditReportForm'
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 const API = 'http://localhost:3000/api/v1/'
-
 
 class App extends React.Component {
   constructor(){
@@ -25,12 +26,10 @@ class App extends React.Component {
     }
   }
 
-
   componentDidMount = () => {
         this.fetchUsers()
         this.fetchReports()
   }
-
 
   fetchUsers = () => {
       fetch(API + "users")
@@ -121,16 +120,16 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar />
-            <Switch>
-              <Route exact path='/' render={ (props) => <Home {...props} reports={this.state.reports} /> } />
-              <Route path='/login' render={ (props) => <Login {...props} handleUserLogin={this.handleUserLogin} /> } />
-              <Route path='/dashboard' render={ (props) => <Dashboard {...props} handleEditReport={this.handleEditReport} handleDeleteReport={this.handleDeleteReport} users={this.state.users} loggedInUser={this.state.loggedInUser}  /> }  />
-              <Route path='/reports/:id/edit' component={EditReportForm} />
-              <Route path='/signup' component={Signup} />
-              <Route path='/newreport' component={NewReport} />
-
-            </Switch>
+          <CssBaseline />
+            <Navbar />
+              <Switch>
+                <Route exact path='/' render={ (props) => <Home {...props} reports={this.state.reports} /> } />
+                <Route path='/login' render={ (props) => <Login {...props} handleUserLogin={this.handleUserLogin} /> } />
+                <Route path='/dashboard' render={ (props) => <Dashboard {...props} handleEditReport={this.handleEditReport} handleDeleteReport={this.handleDeleteReport} users={this.state.users} loggedInUser={this.state.loggedInUser}  /> }  />
+                <Route path='/reports/:id/edit' component={EditReportForm} />
+                <Route path='/signup' component={Signup} />
+                <Route path='/newreport' component={NewReport} />
+              </Switch>
         </div>
     </BrowserRouter>
     );
