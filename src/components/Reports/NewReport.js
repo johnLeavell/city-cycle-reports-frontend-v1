@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 
-
 const API = 'http://localhost:3000/api/v1/reports'
   
 export class NewReport extends Component {
@@ -113,6 +112,7 @@ export class NewReport extends Component {
                         <Button size="small" color="primary">
                         Submit Report
                         </Button>
+                        
                     </form>
             </div>
         )

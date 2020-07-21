@@ -31,7 +31,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <h3>Sign in</h3>
+        <h3>Login</h3>
           <form onSubmit={this.handleSubmit}>
             <input name={'username'} 
             onChange={this.handleInputChange} 
