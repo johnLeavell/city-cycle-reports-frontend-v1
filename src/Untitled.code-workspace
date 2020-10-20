@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "../../city-reports-backend"
+			"path": ".."
 		},
 		{
-			"path": ".."
+			"path": "../../city-cycle-reports-backend"
 		}
 	]
 }

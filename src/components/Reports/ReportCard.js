@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -23,20 +23,20 @@ export default function ReportCard(props) {
 
   // console.log(props);
   
-  const renderCardActions = () => {
-    if(props.renderButtons) {
-      return (
-        <CardActions>
-        <Button onClick={(e) => props.handleEditReport(e, props.report)} size="small" color="primary">
-          Edit
-        </Button>
-        <Button onClick={(e) => props.handleDeleteReport(e, props.report)} size="small" color="primary">
-          Delete Report
-        </Button>
-      </CardActions>
-      )
-    }
-  }
+  // const renderCardActions = () => {
+  //   if(props.renderButtons) {
+  //     return (
+  //       <CardActions>
+  //       <Button onClick={(e) => props.handleEditReport(e, props.report)} size="small" color="primary">
+  //         Edit
+  //       </Button>
+  //       <Button onClick={(e) => props.handleDeleteReport(e, props.report)} size="small" color="primary">
+  //         Delete Report
+  //       </Button>
+  //     </CardActions>
+  //     )
+  //   }
+  // }
 
 
   return (
@@ -56,7 +56,6 @@ export default function ReportCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-        {renderCardActions()}
     </Card>
   );
 }

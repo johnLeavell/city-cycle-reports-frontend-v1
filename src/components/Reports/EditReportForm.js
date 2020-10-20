@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 
 
-const API = 'http://localhost:3000/api/v1/reports'
+const API = 'https://cors-anywhere.herokuapp.com/http://localhost:3000/api/v1/reports'
   
 export class EditReportForm extends Component {
     constructor(){
